@@ -1,0 +1,18 @@
+<?php
+// webhook.php - This is your callback URL
+
+// Get the JSON payload from the incoming request
+$payload = file_get_contents('php://input');
+
+// Log the incoming data (optional)
+file_put_contents('webhook_log.txt', $payload . PHP_EOL, FILE_APPEND);
+
+// Process the data
+$data = json_decode($payload, true);
+
+// Do something with the data, like saving it in a database or triggering an action
+
+// Send a response to confirm receipt of the webhook
+http_response_code(200);
+echo json_encode(['status' => 'received']);
+?>
